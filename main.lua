@@ -7,13 +7,12 @@ function love.load()
     score = 0
     gameState = 0
     prevKeyPressed = 'a'
-    snakeJustAte = false
     gameFont = love.graphics.newFont(20)
     math.randomseed(os.time())
 
-    snakeCfg = {}
-    snakeCfg.size = 30
-    snakeCfg.speed = 600
+    -- snake & controls
+    require('snake')
+    require('controls')
 
     -- borders
     border = {}
@@ -22,89 +21,13 @@ function love.load()
     border.top = snakeCfg.size * 2
     border.bottom = love.graphics.getHeight() - snakeCfg.size -- może być potrzebwa uwzględnienia niepodzielnych przez 30?
     
-    cherry = {}
-    cherry.radius = snakeCfg.size / 2
-    cherry.x = math.random(border.left / snakeCfg.size, math.floor(border.right / snakeCfg.size - 1)) * snakeCfg.size + cherry.radius -- zmienić na funkcjęl
-    cherry.y = math.random(border.top / snakeCfg.size, math.floor(border.bottom / snakeCfg.size - 1)) * snakeCfg.size + cherry.radius
-
-    snakePos = {}
-    for i=1, 3, 1 do
-        local snakePart = {}
-        snakePart.x = 300 + i * snakeCfg.size
-        snakePart.y = 300
-        table.insert(snakePos, snakePart)
-    end
-
-    snakeDirection = {}
-    snakeDirection.x = snakeCfg.size
-    snakeDirection.y = 0
-
-    -- colors
-    yellowLight = {}
-    yellowLight.r = 255/255
-    yellowLight.g = 255/255
-    yellowLight.b = 191/255
-
-    yellowDark = {}
-    yellowDark.r = 255/255
-    yellowDark.g = 255/255
-    yellowDark.b = 191/255
-
-    yellowDark = {}
-    yellowDark.r = 255/255
-    yellowDark.g = 233/255
-    yellowDark.b = 113/255
-
-    redDark = {}
-    redDark.r = 208/255
-    redDark.g = 79/255
-    redDark.b = 50/255
-
-    blueDark ={}
-    blueDark.r = 24/255
-    blueDark.g = 74/255
-    blueDark.b = 146/255
+    -- cherry spawning & colors config
+    require('cherry')
+    require('colors')
 end
 
 function distanceBetween(x1, y1, x2, y2)
     return math.sqrt((x2 - x1)^2 + (y2 - y1)^2)
-end
-
-
-function snakeMove()
-    for i = #snakePos, 1, -1 do
-        if i > 1 then
-            snakePos[i].x = snakePos[i-1].x
-            snakePos[i].y = snakePos[i-1].y
-        else
-            snakePos[1].x = snakePos[1].x + snakeDirection.x
-            snakePos[1].y = snakePos[1].y + snakeDirection.y
-        end
-    end  
-end
-
-function love.keypressed(key)
-    if key == 'a' and prevKeyPressed ~= 'd' then
-        snakeDirection.x = -snakeCfg.size
-        snakeDirection.y = 0
-        prevKeyPressed = 'a'
-    elseif key == 'd' and prevKeyPressed ~= 'a' then
-        snakeDirection.x = snakeCfg.size
-        snakeDirection.y = 0
-        prevKeyPressed = 'd'
-    elseif key == 'w' and prevKeyPressed ~= 's' then
-        snakeDirection.x = 0
-        snakeDirection.y = -snakeCfg.size
-        prevKeyPressed = 'w'
-    elseif key == 's' and prevKeyPressed ~= 'w' then
-        snakeDirection.x = 0
-        snakeDirection.y = snakeCfg.size
-        prevKeyPressed = 's'
-    elseif key == 'escape' then
-        love.event.quit()
-    elseif key == 'space' and (gameState == 0) then
-        gameState = 1
-    end
 end
 
 function love.update(dt)
