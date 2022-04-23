@@ -87,7 +87,7 @@ function love.draw()
     if gameState == 0 then
         love.graphics.setColor(redDark.r, redDark.g, redDark.b)
         love.graphics.printf('>> WELCOME TO SNAKE <<', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
-        love.graphics.printf('>> PRESS SPACE BAR TO START <<', 0, love.graphics.getHeight() / 2 + 30, love.graphics.getWidth(), 'center')
+        love.graphics.printf('>> PRESS SPACE BAR TO START <<', 0, love.graphics.getHeight() / 2 + 40, love.graphics.getWidth(), 'center')
     end
 
     -- snake    
@@ -104,6 +104,6 @@ function love.draw()
     if gameState == 2 then
         love.graphics.setColor(redDark.r, redDark.g, redDark.b)
         love.graphics.printf('>> GAME OVER <<', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
-        love.graphics.printf('>> HELL YEAH <<', 0, love.graphics.getHeight() / 2 + 30, love.graphics.getWidth(), 'center')
+        love.graphics.printf('>> HELL YEAH <<', 0, love.graphics.getHeight() / 2 + 40, love.graphics.getWidth(), 'center')
     end
 end
