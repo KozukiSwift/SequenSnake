@@ -1,5 +1,18 @@
 function love.load()
-    love.window.setMode(1260, 990, {fullscreen=true})
+    love.window.setMode(0, 0)
+    screenWidht = love.graphics.getWidth()
+    screenHeight = love.graphics.getHeight()
+
+    love.window.setMode(screenWidht, screenHeight)
+
+    snakeCfg = {}
+    snakeCfg.size = 0
+    snakeCfg.speed = 600
+
+    if screenWidht > screenHeight then
+        snakeCfg.size = screenHeight / 32
+        -- dopisać dla else (wysokość większa od szerokości)
+    end
     
     -- basic variables
     timer = 0
@@ -17,9 +30,9 @@ function love.load()
     -- borders
     border = {}
     border.left = snakeCfg.size
-    border.right = love.graphics.getWidth() - snakeCfg.size -- może być potrzebwa uwzględnienia niepodzielnych przez 30?
+    border.right = screenWidht - snakeCfg.size -- może być potrzebwa uwzględnienia niepodzielnych przez 30?
     border.top = snakeCfg.size * 2
-    border.bottom = love.graphics.getHeight() - snakeCfg.size -- może być potrzebwa uwzględnienia niepodzielnych przez 30?
+    border.bottom = screenHeight - snakeCfg.size -- może być potrzebwa uwzględnienia niepodzielnych przez 30?
     
     -- cherry spawning & colors config
     require('cherry')
@@ -78,15 +91,21 @@ function love.draw()
     love.graphics.setFont(gameFont)
     love.graphics.print('Snake >> Score:  ' .. score .. ' >> Timer: ' .. math.ceil(timer), 20, 8)
     love.graphics.setColor(yellowDark.r, yellowDark.g, yellowDark.b)
-    love.graphics.rectangle('fill', 0, 0, snakeCfg.size, love.graphics.getHeight()) -- naprawić wymiary
-    love.graphics.rectangle('fill', love.graphics.getWidth() - snakeCfg.size, 0, snakeCfg.size, love.graphics.getHeight())
-    love.graphics.rectangle('fill', 0, snakeCfg.size, love.graphics.getWidth(), snakeCfg.size)
-    love.graphics.rectangle('fill', 0, love.graphics.getHeight() - 10, love.graphics.getWidth(), 10)
+    love.graphics.rectangle('fill', 0, 0, border.left, screenHeight)
+    love.graphics.rectangle('fill', border.right, 0, snakeCfg.size, screenHeight)
+    love.graphics.rectangle('fill', 0, border.top, screenWidht, snakeCfg.size)
+    love.graphics.rectangle('fill', 0, border.bottom, screenWidht, snakeCfg.size)
 
     -- debug
+    love.graphics.print('Debug measured width: ' .. screenWidht, 50, 320)
     love.graphics.print('Debug width: ' .. love.graphics.getWidth(), 50, 350)
     love.graphics.print('Debug hegight: ' .. love.graphics.getHeight(), 50, 380)
     love.graphics.print('Debug border right: ' .. border.right, 50, 410)
+    love.graphics.print('Debug border left: ' .. border.left, 50, 440)
+    love.graphics.print('Debug snake size: ' .. snakeCfg.size, 50, 470)
+    love.graphics.print('Debug snake head X: ' .. snakePos[1].x, 50, 500)
+    love.graphics.print('Debug snake head Y: ' .. snakePos[1].y, 50, 530)
+    love.graphics.print('Debug cherry radius: ' .. cherry.radius, 50, 560)
     
     -- start
     if gameState == 0 then

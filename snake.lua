@@ -1,6 +1,3 @@
-snakeCfg = {}
-snakeCfg.size = 30
-snakeCfg.speed = 600
 snakeJustAte = false
 
 snakePos = {}
