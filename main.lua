@@ -81,9 +81,9 @@ function love.update(dt)
     end
 
     -- checking if snake ate the cherry (+ spawning new cherry)
-    if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x - cherry.radius, cherry.y - cherry.radius) < snakeCfg.size then
-        cherry.x = math.random(border.left / snakeCfg.size, math.floor(border.right / snakeCfg.size - 1)) * snakeCfg.size + cherry.radius
-        cherry.y = math.random(border.top / snakeCfg.size, math.floor(border.bottom / snakeCfg.size - 1)) * snakeCfg.size + cherry.radius
+    if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x, cherry.y) < snakeCfg.size / 2  then
+        cherry.x = math.random(border.left / snakeCfg.size, math.floor(border.right / snakeCfg.size - 1)) * snakeCfg.size
+        cherry.y = math.random(border.top / snakeCfg.size, math.floor(border.bottom / snakeCfg.size - 1)) * snakeCfg.size
         score = score + 1
         snakeJustAte = true
     end
@@ -124,7 +124,6 @@ function love.draw()
     love.graphics.print('Debug snake size: ' .. snakeCfg.size, 50, 375)
     love.graphics.print('Debug snake head X: ' .. snakePos[1].x, 50, 390)
     love.graphics.print('Debug snake head Y: ' .. snakePos[1].y, 50, 405)
-    love.graphics.print('Debug cherry radius: ' .. cherry.radius, 50, 420)
     
     -- start
     if gameState == 0 then
@@ -137,7 +136,8 @@ function love.draw()
     -- play    
     if gameState == 1 then
         love.graphics.setColor(redDark.r, redDark.g, redDark.b)
-        love.graphics.circle('fill', cherry.x, cherry.y, cherry.radius)
+        --love.graphics.circle('fill', cherry.x, cherry.y, cherry.radius)
+        love.graphics.rectangle('fill', cherry.x, cherry.y, snakeCfg.size, snakeCfg.size)
         love.graphics.setColor(blueDark.r, blueDark.g, blueDark.b)
         for i, s in ipairs(snakePos) do
             love.graphics.rectangle('fill', s.x, s.y, snakeCfg.size, snakeCfg.size)
