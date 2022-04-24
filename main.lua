@@ -30,9 +30,9 @@ function love.load()
     -- borders
     border = {}
     border.left = snakeCfg.size
-    border.right = screenWidht - snakeCfg.size -- może być potrzebwa uwzględnienia niepodzielnych przez 30?
+    border.right = screenWidht - snakeCfg.size 
     border.top = snakeCfg.size * 2
-    border.bottom = screenHeight - snakeCfg.size -- może być potrzebwa uwzględnienia niepodzielnych przez 30?
+    border.bottom = screenHeight - snakeCfg.size
     
     -- cherry spawning & colors config
     require('cherry')
@@ -93,7 +93,7 @@ function love.draw()
     love.graphics.setColor(yellowDark.r, yellowDark.g, yellowDark.b)
     love.graphics.rectangle('fill', 0, 0, border.left, screenHeight)
     love.graphics.rectangle('fill', border.right, 0, snakeCfg.size, screenHeight)
-    love.graphics.rectangle('fill', 0, border.top, screenWidht, snakeCfg.size)
+    love.graphics.rectangle('fill', 0, border.top - snakeCfg.size, screenWidht, snakeCfg.size)
     love.graphics.rectangle('fill', 0, border.bottom, screenWidht, snakeCfg.size)
 
     -- debug

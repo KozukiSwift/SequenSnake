@@ -3,8 +3,8 @@ snakeJustAte = false
 snakePos = {}
 for i=1, 3, 1 do
     local snakePart = {}
-    snakePart.x = 300 + i * snakeCfg.size
-    snakePart.y = 300
+    snakePart.x = (15 + i) * snakeCfg.size
+    snakePart.y = 15 * snakeCfg.size
     table.insert(snakePos, snakePart)
 end
 
