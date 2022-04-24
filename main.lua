@@ -81,7 +81,7 @@ function love.update(dt)
     end
 
     -- checking if snake ate the cherry (+ spawning new cherry)
-    if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x, cherry.y) < snakeCfg.size / 2  then
+    if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x, cherry.y) < snakeCfg.size / 2 then
         cherry.x = math.random(border.left / snakeCfg.size, math.floor(border.right / snakeCfg.size - 1)) * snakeCfg.size
         cherry.y = math.random(border.top / snakeCfg.size, math.floor(border.bottom / snakeCfg.size - 1)) * snakeCfg.size
         score = score + 1
