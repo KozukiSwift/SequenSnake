@@ -13,6 +13,27 @@ function love.load()
         snakeCfg.size = screenHeight / 32
         -- dopisać dla else (wysokość większa od szerokości)
     end
+
+    -- borders // wariant dla ekranów szerszych niż wyższych (do poprawy później)
+    border = {}
+    border.left = (screenWidht - 40 * snakeCfg.size) / 2
+    border.right = border.left + 40 * snakeCfg.size 
+    border.top = snakeCfg.size
+    border.bottom = screenHeight - snakeCfg.size
+
+    snakeJustAte = false
+
+    snakePos = {}
+    for i=1, 3, 1 do
+        local snakePart = {}
+        snakePart.x = border.left + (5 + i) * snakeCfg.size
+        snakePart.y = border.top + 5 * snakeCfg.size
+        table.insert(snakePos, snakePart)
+    end
+
+    snakeDirection = {}
+    snakeDirection.x = snakeCfg.size
+    snakeDirection.y = 0
     
     -- basic variables
     timer = 0
@@ -26,13 +47,6 @@ function love.load()
     -- snake & controls
     require('snake')
     require('controls')
-
-    -- borders
-    border = {}
-    border.left = snakeCfg.size
-    border.right = screenWidht - snakeCfg.size 
-    border.top = snakeCfg.size * 2
-    border.bottom = screenHeight - snakeCfg.size
     
     -- cherry spawning & colors config
     require('cherry')
@@ -89,7 +103,7 @@ function love.draw()
     -- boarder + timer etc.:
     love.graphics.setColor(blueDark.r, blueDark.g, blueDark.b)
     love.graphics.setFont(gameFont)
-    love.graphics.print('Snake >> Score:  ' .. score .. ' >> Timer: ' .. math.ceil(timer), 20, 8)
+    -- love.graphics.print('Snake >> Score:  ' .. score .. ' >> Timer: ' .. math.ceil(timer), 20, 8)
     love.graphics.setColor(yellowDark.r, yellowDark.g, yellowDark.b)
     love.graphics.rectangle('fill', 0, 0, border.left, screenHeight)
     love.graphics.rectangle('fill', border.right, 0, snakeCfg.size, screenHeight)
@@ -97,6 +111,7 @@ function love.draw()
     love.graphics.rectangle('fill', 0, border.bottom, screenWidht, snakeCfg.size)
 
     -- debug
+    love.graphics.setColor(redDark.r, redDark.g, redDark.b)
     love.graphics.print('Debug measured width: ' .. screenWidht, 50, 320)
     love.graphics.print('Debug width: ' .. love.graphics.getWidth(), 50, 350)
     love.graphics.print('Debug hegight: ' .. love.graphics.getHeight(), 50, 380)
