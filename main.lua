@@ -1,5 +1,5 @@
 function love.load()
-    love.window.setMode(1260, 990)
+    love.window.setMode(1260, 990, {fullscreen=true})
     
     -- basic variables
     timer = 0
@@ -82,6 +82,11 @@ function love.draw()
     love.graphics.rectangle('fill', love.graphics.getWidth() - snakeCfg.size, 0, snakeCfg.size, love.graphics.getHeight())
     love.graphics.rectangle('fill', 0, snakeCfg.size, love.graphics.getWidth(), snakeCfg.size)
     love.graphics.rectangle('fill', 0, love.graphics.getHeight() - 10, love.graphics.getWidth(), 10)
+
+    -- debug
+    love.graphics.print('Debug width: ' .. love.graphics.getWidth(), 50, 350)
+    love.graphics.print('Debug hegight: ' .. love.graphics.getHeight(), 50, 380)
+    love.graphics.print('Debug border right: ' .. border.right, 50, 410)
     
     -- start
     if gameState == 0 then
