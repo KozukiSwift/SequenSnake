@@ -62,7 +62,7 @@ function love.update(dt)
     timer = timer + dt
     moveTimer = moveTimer + dt * snakeCfg.speed / 60
     
-    if moveTimer > 1 then
+    if moveTimer > 1 and gameState == 1 then
         if snakeJustAte == false then
             snakeMove()
             moveTimer = 0
