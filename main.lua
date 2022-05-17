@@ -52,6 +52,8 @@ function love.load()
     -- cherry spawning & colors config
     require('cherry')
     require('colors')
+
+    spawnCherry()
 end
 
 function distanceBetween(x1, y1, x2, y2)
@@ -82,8 +84,7 @@ function love.update(dt)
 
     -- checking if snake ate the cherry (+ spawning new cherry)
     if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x, cherry.y) < snakeCfg.size / 2 then
-        cherry.x = math.random(border.left / snakeCfg.size, math.floor(border.right / snakeCfg.size - 1)) * snakeCfg.size
-        cherry.y = math.random(border.top / snakeCfg.size, math.floor(border.bottom / snakeCfg.size - 1)) * snakeCfg.size
+        spawnCherry()
         score = score + 1
         snakeJustAte = true
     end
