@@ -1,9 +1,5 @@
 function love.load()
-    love.window.setMode(0, 0)
-    screenWidht = love.graphics.getWidth()
-    screenHeight = love.graphics.getHeight()
-
-    love.window.setMode(screenWidht, screenHeight)
+    require('config')
 
     snakeCfg = {}
     snakeCfg.size = 0
