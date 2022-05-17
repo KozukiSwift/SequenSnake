@@ -1,5 +1,3 @@
-
-
 function snakeMove()
     for i = #snakePos, 1, -1 do
         if i > 1 then
