@@ -1,10 +1,4 @@
-function love.load()
-    love.window.setMode(0, 0)
-    screenWidht = love.graphics.getWidth()
-    screenHeight = love.graphics.getHeight()
-
-    love.window.setMode(screenWidht, screenHeight)
-    
+function love.load()    
     cfg = require('config')
 
     if screenWidht > screenHeight then
