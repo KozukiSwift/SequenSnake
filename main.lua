@@ -1,34 +1,36 @@
 function love.load()
-    require('config')
+    love.window.setMode(0, 0)
+    screenWidht = love.graphics.getWidth()
+    screenHeight = love.graphics.getHeight()
 
-    snakeCfg = {}
-    snakeCfg.size = 0
-    snakeCfg.speed = 600
+    love.window.setMode(screenWidht, screenHeight)
+    
+    cfg = require('config')
 
     if screenWidht > screenHeight then
-        snakeCfg.size = screenHeight / 32
+        cfg.size = screenHeight / 32
         -- dopisać dla else (wysokość większa od szerokości)
     end
 
     -- borders // wariant dla ekranów szerszych niż wyższych (do poprawy później)
     border = {}
-    border.left = (screenWidht - 40 * snakeCfg.size) / 2
-    border.right = border.left + 40 * snakeCfg.size 
-    border.top = snakeCfg.size
-    border.bottom = screenHeight - snakeCfg.size
+    border.left = (screenWidht - 40 * cfg.size) / 2
+    border.right = border.left + 40 * cfg.size 
+    border.top = cfg.size
+    border.bottom = screenHeight - cfg.size
 
     snakeJustAte = false
 
     snakePos = {}
     for i=1, 3, 1 do
         local snakePart = {}
-        snakePart.x = border.left + (5 + i) * snakeCfg.size
-        snakePart.y = border.top + 5 * snakeCfg.size
+        snakePart.x = border.left + (5 + i) * cfg.size
+        snakePart.y = border.top + 5 * cfg.size
         table.insert(snakePos, snakePart)
     end
 
     snakeDirection = {}
-    snakeDirection.x = snakeCfg.size
+    snakeDirection.x = cfg.size
     snakeDirection.y = 0
     
     -- basic variables
@@ -49,7 +51,7 @@ function love.load()
     require('cherry')
     require('colors')
 
-    spawnCherry()
+    spawnCherry(cfg.size)
 end
 
 function distanceBetween(x1, y1, x2, y2)
@@ -58,7 +60,7 @@ end
 
 function love.update(dt)
     timer = timer + dt
-    moveTimer = moveTimer + dt * snakeCfg.speed / 60
+    moveTimer = moveTimer + dt * cfg.speed / 60
     
     if moveTimer > 1 and gameState == 1 then
         if snakeJustAte == false then
@@ -79,16 +81,16 @@ function love.update(dt)
     end
 
     -- checking if snake ate the cherry (+ spawning new cherry)
-    if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x, cherry.y) < snakeCfg.size / 2 then
-        spawnCherry()
+    if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x, cherry.y) < cfg.size / 2 then
+        spawnCherry(cfg.size)
         score = score + 1
         snakeJustAte = true
     end
 
     -- checking if snake hit the boarder
-    if snakePos[1].x == (border.left - snakeCfg.size) or 
+    if snakePos[1].x == (border.left - cfg.size) or 
                     snakePos[1].x == border.right or 
-                    snakePos[1].y == (border.top - snakeCfg.size) or 
+                    snakePos[1].y == (border.top - cfg.size) or 
                     snakePos[1].y == border.bottom then
         gameState = 2
     end
@@ -100,10 +102,10 @@ function love.draw()
 
     -- boarder
     love.graphics.setColor(yellowDark.r, yellowDark.g, yellowDark.b)
-    love.graphics.rectangle('fill', border.left - snakeCfg.size, 0, snakeCfg.size, screenHeight)
-    love.graphics.rectangle('fill', border.right, 0, snakeCfg.size, screenHeight)
-    love.graphics.rectangle('fill', border.left, border.top - snakeCfg.size, snakeCfg.size * 40, snakeCfg.size)
-    love.graphics.rectangle('fill', border.left, border.bottom, snakeCfg.size * 40, snakeCfg.size)
+    love.graphics.rectangle('fill', border.left - cfg.size, 0, cfg.size, screenHeight)
+    love.graphics.rectangle('fill', border.right, 0, cfg.size, screenHeight)
+    love.graphics.rectangle('fill', border.left, border.top - cfg.size, cfg.size * 40, cfg.size)
+    love.graphics.rectangle('fill', border.left, border.bottom, cfg.size * 40, cfg.size)
 
     -- timer / score / etc - TO DO
     --love.graphics.setColor(blueDark.r, blueDark.g, blueDark.b)
@@ -118,7 +120,7 @@ function love.draw()
     love.graphics.print('Debug hegight: ' .. love.graphics.getHeight(), 50, 330)
     love.graphics.print('Debug border right: ' .. border.right, 50, 345)
     love.graphics.print('Debug border left: ' .. border.left, 50, 360)
-    love.graphics.print('Debug snake size: ' .. snakeCfg.size, 50, 375)
+    love.graphics.print('Debug snake size: ' .. cfg.size, 50, 375)
     love.graphics.print('Debug snake head X: ' .. snakePos[1].x, 50, 390)
     love.graphics.print('Debug snake head Y: ' .. snakePos[1].y, 50, 405)
     
@@ -134,10 +136,10 @@ function love.draw()
     if gameState == 1 then
         love.graphics.setColor(redDark.r, redDark.g, redDark.b)
         --love.graphics.circle('fill', cherry.x, cherry.y, cherry.radius)
-        love.graphics.rectangle('fill', cherry.x, cherry.y, snakeCfg.size, snakeCfg.size)
+        love.graphics.rectangle('fill', cherry.x, cherry.y, cfg.size, cfg.size)
         love.graphics.setColor(blueDark.r, blueDark.g, blueDark.b)
         for i, s in ipairs(snakePos) do
-            love.graphics.rectangle('fill', s.x, s.y, snakeCfg.size, snakeCfg.size)
+            love.graphics.rectangle('fill', s.x, s.y, cfg.size, cfg.size)
         end
     end
 
