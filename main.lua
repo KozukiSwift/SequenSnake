@@ -1,6 +1,5 @@
 function love.load()
     require('config')
-    fileTest = require('cfgtest')
 
     snakeCfg = {}
     snakeCfg.size = 0
@@ -122,7 +121,6 @@ function love.draw()
     love.graphics.print('Debug snake size: ' .. snakeCfg.size, 50, 375)
     love.graphics.print('Debug snake head X: ' .. snakePos[1].x, 50, 390)
     love.graphics.print('Debug snake head Y: ' .. snakePos[1].y, 50, 405)
-    love.graphics.print('Debug file split: ' .. fileTest.x, 50, 420)
     
     -- start
     if gameState == 0 then
