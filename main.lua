@@ -34,7 +34,6 @@ function love.load()
 
     -- snake & controls
     require('snake')
-    require('controls')
     
     -- cherry spawning & colors config
     require('cherry')
