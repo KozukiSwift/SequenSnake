@@ -38,7 +38,7 @@ function love.load()
     
     -- cherry spawning & colors config
     require('cherry')
-    require('colors')
+    colors = require('colors')
 
     spawnCherry(cfg.size)
 end
@@ -87,22 +87,22 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.setBackgroundColor(yellowLight.r, yellowLight.g, yellowLight.b)
+    love.graphics.setBackgroundColor(colors.yellowLight.r, colors.yellowLight.g, colors.yellowLight.b)
 
     -- boarder
-    love.graphics.setColor(yellowDark.r, yellowDark.g, yellowDark.b)
+    love.graphics.setColor(colors.yellowDark.r, colors.yellowDark.g, colors.yellowDark.b)
     love.graphics.rectangle('fill', border.left - cfg.size, 0, cfg.size, cfg.screenHeight)
     love.graphics.rectangle('fill', border.right, 0, cfg.size, cfg.screenHeight)
     love.graphics.rectangle('fill', border.left, border.top - cfg.size, cfg.size * 40, cfg.size)
     love.graphics.rectangle('fill', border.left, border.bottom, cfg.size * 40, cfg.size)
 
     -- timer / score / etc - TO DO
-    --love.graphics.setColor(blueDark.r, blueDark.g, blueDark.b)
+    --love.graphics.setColor(colors.blueDark.r, colors.blueDark.g, colors.blueDark.b)
     --love.graphics.setFont(gameFont)
     --love.graphics.print('Snake >> Score:  ' .. score .. ' >> Timer: ' .. math.ceil(timer), 20, 8)
 
     -- debug
-    love.graphics.setColor(redDark.r, redDark.g, redDark.b)
+    love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
     love.graphics.setFont(debugFont)
     love.graphics.print('Debug measured width: ' .. cfg.screenWidht, 50, 300)
     love.graphics.print('Debug width: ' .. love.graphics.getWidth(), 50, 315)
@@ -116,17 +116,17 @@ function love.draw()
     -- start
     if gameState == 0 then
         love.graphics.setFont(gameFont)
-        love.graphics.setColor(redDark.r, redDark.g, redDark.b)
+        love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
         love.graphics.printf('>> WELCOME TO SNAKE <<', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
         love.graphics.printf('>> PRESS SPACE BAR TO START <<', 0, love.graphics.getHeight() / 2 + 40, love.graphics.getWidth(), 'center')
     end
 
     -- play    
     if gameState == 1 then
-        love.graphics.setColor(redDark.r, redDark.g, redDark.b)
+        love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
         --love.graphics.circle('fill', cherry.x, cherry.y, cherry.radius)
         love.graphics.rectangle('fill', cherry.x, cherry.y, cfg.size, cfg.size)
-        love.graphics.setColor(blueDark.r, blueDark.g, blueDark.b)
+        love.graphics.setColor(colors.blueDark.r, colors.blueDark.g, colors.blueDark.b)
         for i, s in ipairs(snakePos) do
             love.graphics.rectangle('fill', s.x, s.y, cfg.size, cfg.size)
         end
@@ -135,7 +135,7 @@ function love.draw()
     -- game over
     if gameState == 2 then
         love.graphics.setFont(gameFont)
-        love.graphics.setColor(redDark.r, redDark.g, redDark.b)
+        love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
         love.graphics.printf('>> GAME OVER <<', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
         love.graphics.printf('>> HELL YEAH <<', 0, love.graphics.getHeight() / 2 + 40, love.graphics.getWidth(), 'center')
     end
