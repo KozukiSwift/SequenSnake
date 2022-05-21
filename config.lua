@@ -1,3 +1,5 @@
+math.randomseed(os.time())
+
 local config = {}
 config.size = 0
 config.speed = 600

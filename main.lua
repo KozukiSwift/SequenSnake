@@ -21,13 +21,9 @@ function love.load()
     snakeDirection = {}
     snakeDirection.x = cfg.size
     snakeDirection.y = 0
-    
-    math.randomseed(os.time())
 
-    -- snake & controls
+    -- loading files
     require('snake')
-    
-    -- cherry spawning & colors config
     require('cherry')
     colors = require('colors')
     game = require('game')
@@ -88,11 +84,6 @@ function love.draw()
     love.graphics.rectangle('fill', border.right, 0, cfg.size, cfg.screenHeight)
     love.graphics.rectangle('fill', border.left, border.top - cfg.size, cfg.size * 40, cfg.size)
     love.graphics.rectangle('fill', border.left, border.bottom, cfg.size * 40, cfg.size)
-
-    -- game.timer / game.score / etc - TO DO
-    --love.graphics.setColor(colors.blueDark.r, colors.blueDark.g, colors.blueDark.b)
-    --love.graphics.setFont(cfg.gameFont)
-    --love.graphics.print('Snake >> Score:  ' .. game.score .. ' >> Timer: ' .. math.ceil(game.timer), 20, 8)
 
     -- debug
     debug()
