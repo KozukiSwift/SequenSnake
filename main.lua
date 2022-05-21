@@ -1,17 +1,12 @@
 function love.load()    
     cfg = require('config')
-
-    if screenWidht > screenHeight then
-        cfg.size = screenHeight / 32
-        -- dopisać dla else (wysokość większa od szerokości)
-    end
-
+    
     -- borders // wariant dla ekranów szerszych niż wyższych (do poprawy później)
     border = {}
-    border.left = (screenWidht - 40 * cfg.size) / 2
+    border.left = (cfg.screenWidht - 40 * cfg.size) / 2
     border.right = border.left + 40 * cfg.size 
     border.top = cfg.size
-    border.bottom = screenHeight - cfg.size
+    border.bottom = cfg.screenHeight - cfg.size
 
     snakeJustAte = false
 
@@ -96,8 +91,8 @@ function love.draw()
 
     -- boarder
     love.graphics.setColor(yellowDark.r, yellowDark.g, yellowDark.b)
-    love.graphics.rectangle('fill', border.left - cfg.size, 0, cfg.size, screenHeight)
-    love.graphics.rectangle('fill', border.right, 0, cfg.size, screenHeight)
+    love.graphics.rectangle('fill', border.left - cfg.size, 0, cfg.size, cfg.screenHeight)
+    love.graphics.rectangle('fill', border.right, 0, cfg.size, cfg.screenHeight)
     love.graphics.rectangle('fill', border.left, border.top - cfg.size, cfg.size * 40, cfg.size)
     love.graphics.rectangle('fill', border.left, border.bottom, cfg.size * 40, cfg.size)
 
@@ -109,7 +104,7 @@ function love.draw()
     -- debug
     love.graphics.setColor(redDark.r, redDark.g, redDark.b)
     love.graphics.setFont(debugFont)
-    love.graphics.print('Debug measured width: ' .. screenWidht, 50, 300)
+    love.graphics.print('Debug measured width: ' .. cfg.screenWidht, 50, 300)
     love.graphics.print('Debug width: ' .. love.graphics.getWidth(), 50, 315)
     love.graphics.print('Debug hegight: ' .. love.graphics.getHeight(), 50, 330)
     love.graphics.print('Debug border right: ' .. border.right, 50, 345)
