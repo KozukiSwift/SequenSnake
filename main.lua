@@ -22,14 +22,6 @@ function love.load()
     snakeDirection.x = cfg.size
     snakeDirection.y = 0
     
-    -- basic variables
-    timer = 0
-    moveTimer = 0
-    score = 0
-    gameState = 0
-    prevKeyPressed = 'a'
-    gameFont = love.graphics.newFont(20)
-    debugFont = love.graphics.newFont(12)
     math.randomseed(os.time())
 
     -- snake & controls
@@ -38,6 +30,7 @@ function love.load()
     -- cherry spawning & colors config
     require('cherry')
     colors = require('colors')
+    game = require('game')
     require('debugger')
 
     spawnCherry(cfg.size)
@@ -48,13 +41,13 @@ function distanceBetween(x1, y1, x2, y2)
 end
 
 function love.update(dt)
-    timer = timer + dt
-    moveTimer = moveTimer + dt * cfg.speed / 60
+    game.timer = game.timer + dt
+    game.moveTimer = game.moveTimer + dt * cfg.speed / 60
     
-    if moveTimer > 1 and gameState == 1 then
+    if game.moveTimer > 1 and game.state == 1 then
         if snakeJustAte == false then
             snakeMove(snakePos)
-            moveTimer = 0
+            game.moveTimer = 0
         elseif snakeJustAte == true then
             local snakePart = {}
             snakePart.x = snakePos[#snakePos].x
@@ -64,7 +57,7 @@ function love.update(dt)
             
             table.insert(snakePos, snakePart)
 
-            moveTimer = 0
+            game.moveTimer = 0
             snakeJustAte = false
         end
     end
@@ -72,7 +65,7 @@ function love.update(dt)
     -- checking if snake ate the cherry (+ spawning new cherry)
     if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x, cherry.y) < cfg.size / 2 then
         spawnCherry(cfg.size)
-        score = score + 1
+        game.score = game.score + 1
         snakeJustAte = true
     end
 
@@ -81,7 +74,7 @@ function love.update(dt)
                     snakePos[1].x == border.right or 
                     snakePos[1].y == (border.top - cfg.size) or 
                     snakePos[1].y == border.bottom then
-        gameState = 2
+        game.state = 2
     end
 
 end
@@ -96,24 +89,24 @@ function love.draw()
     love.graphics.rectangle('fill', border.left, border.top - cfg.size, cfg.size * 40, cfg.size)
     love.graphics.rectangle('fill', border.left, border.bottom, cfg.size * 40, cfg.size)
 
-    -- timer / score / etc - TO DO
+    -- game.timer / game.score / etc - TO DO
     --love.graphics.setColor(colors.blueDark.r, colors.blueDark.g, colors.blueDark.b)
-    --love.graphics.setFont(gameFont)
-    --love.graphics.print('Snake >> Score:  ' .. score .. ' >> Timer: ' .. math.ceil(timer), 20, 8)
+    --love.graphics.setFont(cfg.gameFont)
+    --love.graphics.print('Snake >> Score:  ' .. game.score .. ' >> Timer: ' .. math.ceil(game.timer), 20, 8)
 
     -- debug
     debug()
     
     -- start
-    if gameState == 0 then
-        love.graphics.setFont(gameFont)
+    if game.state == 0 then
+        love.graphics.setFont(cfg.gameFont)
         love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
         love.graphics.printf('>> WELCOME TO SNAKE <<', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
         love.graphics.printf('>> PRESS SPACE BAR TO START <<', 0, love.graphics.getHeight() / 2 + 40, love.graphics.getWidth(), 'center')
     end
 
     -- play    
-    if gameState == 1 then
+    if game.state == 1 then
         love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
         --love.graphics.circle('fill', cherry.x, cherry.y, cherry.radius)
         love.graphics.rectangle('fill', cherry.x, cherry.y, cfg.size, cfg.size)
@@ -124,8 +117,8 @@ function love.draw()
     end
 
     -- game over
-    if gameState == 2 then
-        love.graphics.setFont(gameFont)
+    if game.state == 2 then
+        love.graphics.setFont(cfg.gameFont)
         love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
         love.graphics.printf('>> GAME OVER <<', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
         love.graphics.printf('>> HELL YEAH <<', 0, love.graphics.getHeight() / 2 + 40, love.graphics.getWidth(), 'center')

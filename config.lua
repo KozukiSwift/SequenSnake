@@ -1,6 +1,7 @@
 local config = {}
 config.size = 0
 config.speed = 600
+config.gameFont = love.graphics.newFont(20)
 
 love.window.setMode(0, 0)
 config.screenWidht = love.graphics.getWidth()
