@@ -38,6 +38,7 @@ function love.load()
     -- cherry spawning & colors config
     require('cherry')
     colors = require('colors')
+    require('debugger')
 
     spawnCherry(cfg.size)
 end
@@ -101,16 +102,7 @@ function love.draw()
     --love.graphics.print('Snake >> Score:  ' .. score .. ' >> Timer: ' .. math.ceil(timer), 20, 8)
 
     -- debug
-    love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
-    love.graphics.setFont(debugFont)
-    love.graphics.print('Debug measured width: ' .. cfg.screenWidht, 50, 300)
-    love.graphics.print('Debug width: ' .. love.graphics.getWidth(), 50, 315)
-    love.graphics.print('Debug hegight: ' .. love.graphics.getHeight(), 50, 330)
-    love.graphics.print('Debug border right: ' .. border.right, 50, 345)
-    love.graphics.print('Debug border left: ' .. border.left, 50, 360)
-    love.graphics.print('Debug snake size: ' .. cfg.size, 50, 375)
-    love.graphics.print('Debug snake head X: ' .. snakePos[1].x, 50, 390)
-    love.graphics.print('Debug snake head Y: ' .. snakePos[1].y, 50, 405)
+    debug()
     
     -- start
     if gameState == 0 then
