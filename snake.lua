@@ -1,4 +1,5 @@
-function snakeMove()
+function snakeMove(argTable)
+    local snakePos = argTable
     for i = #snakePos, 1, -1 do
         if i > 1 then
             snakePos[i].x = snakePos[i-1].x

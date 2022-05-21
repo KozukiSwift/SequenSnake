@@ -63,14 +63,14 @@ function love.update(dt)
     
     if moveTimer > 1 and gameState == 1 then
         if snakeJustAte == false then
-            snakeMove()
+            snakeMove(snakePos)
             moveTimer = 0
         elseif snakeJustAte == true then
             local snakePart = {}
             snakePart.x = snakePos[#snakePos].x
             snakePart.y = snakePos[#snakePos].y 
 
-            snakeMove()
+            snakeMove(snakePos)
             
             table.insert(snakePos, snakePart)
 
