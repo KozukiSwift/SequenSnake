@@ -34,3 +34,8 @@ function love.keypressed(key)
         game.state = 1
     end
 end
+
+local snake = {}
+snake.justAte = false
+
+return snake

@@ -1,8 +1,6 @@
 function love.load()    
     cfg = require('config')
 
-    snakeJustAte = false
-
     snakePos = {}
     for i=1, 3, 1 do
         local snakePart = {}
@@ -16,7 +14,7 @@ function love.load()
     snakeDirection.y = 0
 
     -- loading files
-    require('snake')
+    snake = require('snake')
     require('cherry')
     colors = require('colors')
     game = require('game')
@@ -34,10 +32,10 @@ function love.update(dt)
     game.moveTimer = game.moveTimer + dt * cfg.speed / 60
     
     if game.moveTimer > 1 and game.state == 1 then
-        if snakeJustAte == false then
+        if snake.justAte == false then
             snakeMove(snakePos)
             game.moveTimer = 0
-        elseif snakeJustAte == true then
+        elseif snake.justAte == true then
             local snakePart = {}
             snakePart.x = snakePos[#snakePos].x
             snakePart.y = snakePos[#snakePos].y 
@@ -47,7 +45,7 @@ function love.update(dt)
             table.insert(snakePos, snakePart)
 
             game.moveTimer = 0
-            snakeJustAte = false
+            snake.justAte = false
         end
     end
 
@@ -55,7 +53,7 @@ function love.update(dt)
     if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x, cherry.y) < cfg.size / 2 then
         spawnCherry(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
         game.score = game.score + 1
-        snakeJustAte = true
+        snake.justAte = true
     end
 
     -- checking if snake hit the boarder
