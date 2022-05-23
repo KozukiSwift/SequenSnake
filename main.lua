@@ -9,10 +9,6 @@ function love.load()
         table.insert(snakePos, snakePart)
     end
 
-    snakeDirection = {}
-    snakeDirection.x = cfg.size
-    snakeDirection.y = 0
-
     -- loading files
     snake = require('snake')
     colors = require('colors')
@@ -20,9 +16,10 @@ function love.load()
     require('cherry')
     require('debugger')
 
-    -- spawning initial cherry
+    -- spawning initial cherry / snake direction
     -- powinno zostać przeniesione do miejsca, gdzie gra się rozpoczyna
     spawnCherry(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
+    snakeSetDirection(cfg.size, 0)
 end
 
 function distanceBetween(x1, y1, x2, y2)
