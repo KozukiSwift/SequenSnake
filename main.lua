@@ -1,9 +1,5 @@
 function love.load()    
     cfg = require('config')
-
-    
-
-    -- loading files
     snake = require('snake')
     colors = require('colors')
     game = require('game')
@@ -14,6 +10,7 @@ function love.load()
     -- powinno zostać przeniesione do miejsca, gdzie gra się rozpoczyna
     spawnCherry(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
     snakeSetDirection(cfg.size, 0)
+    spawnSnake(cfg.size, cfg.border.left, cfg.border.top)
 end
 
 function love.update(dt)

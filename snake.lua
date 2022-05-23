@@ -6,11 +6,14 @@ snake.direction.x = 0
 snake.direction.y = 0
 
 snake.position = {}
-for i=1, 3, 1 do
-    local snakePart = {}
-    snakePart.x = cfg.border.left + (5 + i) * cfg.size
-    snakePart.y = cfg.border.top + 5 * cfg.size
-    table.insert(snake.position, snakePart)
+
+function spawnSnake(size, borderLeft, borderTop)
+    for i=1, 3, 1 do
+        local snakePart = {}
+        snakePart.x = borderLeft + (5 + i) * size
+        snakePart.y = borderTop + 5 * size
+        table.insert(snake.position, snakePart)
+    end
 end
 
 function snakeMove(argTable)
