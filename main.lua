@@ -43,13 +43,7 @@ function love.update(dt)
     end
 
     -- checking if snake hit the boarder
-    if snake.position[1].x == (cfg.border.left - cfg.size) or 
-                    snake.position[1].x == cfg.border.right or 
-                    snake.position[1].y == (cfg.border.top - cfg.size) or 
-                    snake.position[1].y == cfg.border.bottom then
-        game.state = 2
-    end
-
+    checkBorderHit()
 end
 
 function love.draw()
@@ -76,7 +70,6 @@ function love.draw()
     -- play    
     if game.state == 1 then
         love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
-        --love.graphics.circle('fill', cherry.x, cherry.y, cherry.radius)
         love.graphics.rectangle('fill', cherry.x, cherry.y, cfg.size, cfg.size)
         love.graphics.setColor(colors.blueDark.r, colors.blueDark.g, colors.blueDark.b)
         for i, s in ipairs(snake.position) do

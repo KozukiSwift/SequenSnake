@@ -34,6 +34,15 @@ function snakeSetDirection(x, y)
     snake.direction.y = y
 end
 
+function checkBorderHit()
+    if snake.position[1].x == (cfg.border.left - cfg.size) or 
+            snake.position[1].x == cfg.border.right or 
+            snake.position[1].y == (cfg.border.top - cfg.size) or 
+            snake.position[1].y == cfg.border.bottom then
+        game.state = 2
+    end
+end
+
 function love.keypressed(key)
     if key == 'a' and game.prevKeyPressed ~= 'd' then
         snakeSetDirection(-cfg.size, 0)
