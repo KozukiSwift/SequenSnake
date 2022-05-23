@@ -51,22 +51,12 @@ function love.draw()
     drawBoarder()
     debug()
     
-    -- start
     if game.state == 0 then
-        drawStartMenu()
-    end
-
-    -- play    
-    if game.state == 1 then
+        drawStartMenu()  
+    elseif game.state == 1 then
         drawCherry()
         drawSnake()
-    end
-
-    -- game over
-    if game.state == 2 then
-        love.graphics.setFont(cfg.gameFont)
-        love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
-        love.graphics.printf('>> GAME OVER <<', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
-        love.graphics.printf('>> HELL YEAH <<', 0, love.graphics.getHeight() / 2 + 40, love.graphics.getWidth(), 'center')
+    elseif game.state == 2 then
+        drawGameOverMenu()
     end
 end

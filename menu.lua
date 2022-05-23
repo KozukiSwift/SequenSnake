@@ -14,3 +14,10 @@ function drawStartMenu()
     love.graphics.printf('>> WELCOME TO SNAKE <<', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
     love.graphics.printf('>> PRESS SPACE BAR TO START <<', 0, love.graphics.getHeight() / 2 + 40, love.graphics.getWidth(), 'center')
 end
+
+function drawGameOverMenu()
+    love.graphics.setFont(cfg.gameFont)
+    love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
+    love.graphics.printf('>> GAME OVER <<', 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), 'center')
+    love.graphics.printf('>> HELL YEAH <<', 0, love.graphics.getHeight() / 2 + 40, love.graphics.getWidth(), 'center')
+end
