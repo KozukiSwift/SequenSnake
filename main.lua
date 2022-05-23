@@ -1,13 +1,7 @@
 function love.load()    
     cfg = require('config')
 
-    snakePos = {}
-    for i=1, 3, 1 do
-        local snakePart = {}
-        snakePart.x = cfg.border.left + (5 + i) * cfg.size
-        snakePart.y = cfg.border.top + 5 * cfg.size
-        table.insert(snakePos, snakePart)
-    end
+    
 
     -- loading files
     snake = require('snake')
@@ -28,16 +22,16 @@ function love.update(dt)
     
     if game.moveTimer > 1 and game.state == 1 then
         if snake.justAte == false then
-            snakeMove(snakePos)
+            snakeMove(snake.position)
             game.moveTimer = 0
         elseif snake.justAte == true then
             local snakePart = {}
-            snakePart.x = snakePos[#snakePos].x
-            snakePart.y = snakePos[#snakePos].y 
+            snakePart.x = snake.position[#snake.position].x
+            snakePart.y = snake.position[#snake.position].y 
 
-            snakeMove(snakePos)
+            snakeMove(snake.position)
             
-            table.insert(snakePos, snakePart)
+            table.insert(snake.position, snakePart)
 
             game.moveTimer = 0
             snake.justAte = false
@@ -45,17 +39,17 @@ function love.update(dt)
     end
 
     -- checking if snake ate the cherry (+ spawning new cherry)
-    if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x, cherry.y) < cfg.size / 2 then
+    if distanceBetween(snake.position[1].x, snake.position[1].y, cherry.x, cherry.y) < cfg.size / 2 then
         spawnCherry(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
         game.score = game.score + 1
         snake.justAte = true
     end
 
     -- checking if snake hit the boarder
-    if snakePos[1].x == (cfg.border.left - cfg.size) or 
-                    snakePos[1].x == cfg.border.right or 
-                    snakePos[1].y == (cfg.border.top - cfg.size) or 
-                    snakePos[1].y == cfg.border.bottom then
+    if snake.position[1].x == (cfg.border.left - cfg.size) or 
+                    snake.position[1].x == cfg.border.right or 
+                    snake.position[1].y == (cfg.border.top - cfg.size) or 
+                    snake.position[1].y == cfg.border.bottom then
         game.state = 2
     end
 
@@ -88,7 +82,7 @@ function love.draw()
         --love.graphics.circle('fill', cherry.x, cherry.y, cherry.radius)
         love.graphics.rectangle('fill', cherry.x, cherry.y, cfg.size, cfg.size)
         love.graphics.setColor(colors.blueDark.r, colors.blueDark.g, colors.blueDark.b)
-        for i, s in ipairs(snakePos) do
+        for i, s in ipairs(snake.position) do
             love.graphics.rectangle('fill', s.x, s.y, cfg.size, cfg.size)
         end
     end

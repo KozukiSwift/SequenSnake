@@ -9,6 +9,6 @@ function debug()
     love.graphics.print('Debug border right: ' .. cfg.border.right, 10, 345)
     love.graphics.print('Debug border left: ' .. cfg.border.left, 10, 360)
     love.graphics.print('Debug snake size: ' .. cfg.size, 10, 375)
-    love.graphics.print('Debug snake head X: ' .. snakePos[1].x, 10, 390)
-    love.graphics.print('Debug snake head Y: ' .. snakePos[1].y, 10, 405)
+    love.graphics.print('Debug snake head X: ' .. snake.position[1].x, 10, 390)
+    love.graphics.print('Debug snake head Y: ' .. snake.position[1].y, 10, 405)
 end
