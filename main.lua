@@ -15,11 +15,13 @@ function love.load()
 
     -- loading files
     snake = require('snake')
-    require('cherry')
     colors = require('colors')
     game = require('game')
+    require('cherry')
     require('debugger')
 
+    -- spawning initial cherry
+    -- powinno zostać przeniesione do miejsca, gdzie gra się rozpoczyna
     spawnCherry(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
 end
 
