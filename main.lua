@@ -6,7 +6,7 @@ function love.load()
     require('cherry')
     require('debugger')
 
-    -- spawning initial cherry / snake direction
+    -- spawning initial cherry / snake / snake direction
     -- powinno zostać przeniesione do miejsca, gdzie gra się rozpoczyna
     spawnCherry(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
     snakeSetDirection(cfg.size, 0)
