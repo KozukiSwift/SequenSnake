@@ -58,12 +58,8 @@ function love.draw()
 
     -- play    
     if game.state == 1 then
-        love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
-        love.graphics.rectangle('fill', cherry.x, cherry.y, cfg.size, cfg.size)
-        love.graphics.setColor(colors.blueDark.r, colors.blueDark.g, colors.blueDark.b)
-        for i, s in ipairs(snake.position) do
-            love.graphics.rectangle('fill', s.x, s.y, cfg.size, cfg.size)
-        end
+        drawCherry()
+        drawSnake()
     end
 
     -- game over

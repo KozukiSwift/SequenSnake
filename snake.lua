@@ -63,4 +63,11 @@ function love.keypressed(key)
     end
 end
 
+function drawSnake()
+    love.graphics.setColor(colors.blueDark.r, colors.blueDark.g, colors.blueDark.b)
+    for i, s in ipairs(snake.position) do
+        love.graphics.rectangle('fill', s.x, s.y, cfg.size, cfg.size)
+    end
+end
+
 return snake
