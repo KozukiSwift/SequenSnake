@@ -1,20 +1,13 @@
 function love.load()    
     cfg = require('config')
-    
-    -- borders // wariant dla ekranów szerszych niż wyższych (do poprawy później)
-    border = {}
-    border.left = (cfg.screenWidht - 40 * cfg.size) / 2
-    border.right = border.left + 40 * cfg.size 
-    border.top = cfg.size
-    border.bottom = cfg.screenHeight - cfg.size
 
     snakeJustAte = false
 
     snakePos = {}
     for i=1, 3, 1 do
         local snakePart = {}
-        snakePart.x = border.left + (5 + i) * cfg.size
-        snakePart.y = border.top + 5 * cfg.size
+        snakePart.x = cfg.border.left + (5 + i) * cfg.size
+        snakePart.y = cfg.border.top + 5 * cfg.size
         table.insert(snakePos, snakePart)
     end
 
@@ -29,7 +22,7 @@ function love.load()
     game = require('game')
     require('debugger')
 
-    spawnCherry(cfg.size)
+    spawnCherry(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
 end
 
 function distanceBetween(x1, y1, x2, y2)
@@ -60,16 +53,16 @@ function love.update(dt)
 
     -- checking if snake ate the cherry (+ spawning new cherry)
     if distanceBetween(snakePos[1].x, snakePos[1].y, cherry.x, cherry.y) < cfg.size / 2 then
-        spawnCherry(cfg.size)
+        spawnCherry(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
         game.score = game.score + 1
         snakeJustAte = true
     end
 
     -- checking if snake hit the boarder
-    if snakePos[1].x == (border.left - cfg.size) or 
-                    snakePos[1].x == border.right or 
-                    snakePos[1].y == (border.top - cfg.size) or 
-                    snakePos[1].y == border.bottom then
+    if snakePos[1].x == (cfg.border.left - cfg.size) or 
+                    snakePos[1].x == cfg.border.right or 
+                    snakePos[1].y == (cfg.border.top - cfg.size) or 
+                    snakePos[1].y == cfg.border.bottom then
         game.state = 2
     end
 
@@ -80,10 +73,10 @@ function love.draw()
 
     -- boarder
     love.graphics.setColor(colors.yellowDark.r, colors.yellowDark.g, colors.yellowDark.b)
-    love.graphics.rectangle('fill', border.left - cfg.size, 0, cfg.size, cfg.screenHeight)
-    love.graphics.rectangle('fill', border.right, 0, cfg.size, cfg.screenHeight)
-    love.graphics.rectangle('fill', border.left, border.top - cfg.size, cfg.size * 40, cfg.size)
-    love.graphics.rectangle('fill', border.left, border.bottom, cfg.size * 40, cfg.size)
+    love.graphics.rectangle('fill', cfg.border.left - cfg.size, 0, cfg.size, cfg.screenHeight)
+    love.graphics.rectangle('fill', cfg.border.right, 0, cfg.size, cfg.screenHeight)
+    love.graphics.rectangle('fill', cfg.border.left, cfg.border.top - cfg.size, cfg.size * 40, cfg.size)
+    love.graphics.rectangle('fill', cfg.border.left, cfg.border.bottom, cfg.size * 40, cfg.size)
 
     -- debug
     debug()

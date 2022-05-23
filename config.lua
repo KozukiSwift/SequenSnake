@@ -16,5 +16,12 @@ if config.screenWidht > config.screenHeight then
     -- dopisać dla else (wysokość większa od szerokości)
 end
 
+-- borders // wariant dla ekranów szerszych niż wyższych (do poprawy później)
+config.border = {}
+config.border.left = (config.screenWidht - 40 * config.size) / 2
+config.border.right = config.border.left + 40 * config.size 
+config.border.top = config.size
+config.border.bottom = config.screenHeight - config.size
+
 
 return config
