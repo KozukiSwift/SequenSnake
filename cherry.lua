@@ -1,4 +1,4 @@
-cherry = {}
+local cherry = {}
 cherry.x = 0
 cherry.y = 0
 
@@ -15,3 +15,5 @@ function drawCherry()
     love.graphics.setColor(colors.redDark.r, colors.redDark.g, colors.redDark.b)
     love.graphics.rectangle('fill', cherry.x, cherry.y, cfg.size, cfg.size)
 end
+
+return cherry

@@ -3,7 +3,7 @@ function love.load()
     snake = require('snake')
     colors = require('colors')
     game = require('game')
-    require('cherry')
+    cherry = require('cherry')
     require('debugger')
     require('menu')
 
