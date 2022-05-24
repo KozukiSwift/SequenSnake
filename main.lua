@@ -54,7 +54,7 @@ function love.draw()
     if game.state == 0 then
         drawStartMenu()  
     elseif game.state == 1 then
-        drawCherry()
+        cherry:draw(cfg.size, colors.redDark.r, colors.redDark.g, colors.redDark.b)
         drawSnake()
     elseif game.state == 2 then
         drawGameOverMenu()
