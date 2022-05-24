@@ -9,7 +9,7 @@ function love.load()
 
     -- spawning initial cherry / snake / snake direction
     -- powinno zostać przeniesione do miejsca, gdzie gra się rozpoczyna
-    spawnCherry(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
+    cherry:spawn(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
     snakeSetDirection(cfg.size, 0)
     spawnSnake(cfg.size, cfg.border.left, cfg.border.top)
 end
@@ -38,7 +38,7 @@ function love.update(dt)
 
     -- checking if snake ate the cherry (+ spawning new cherry)
     if distanceBetween(snake.position[1].x, snake.position[1].y, cherry.x, cherry.y) < cfg.size / 2 then
-        spawnCherry(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
+        cherry:spawn(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
         game.score = game.score + 1
         snake.justAte = true
     end
