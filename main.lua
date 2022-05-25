@@ -1,9 +1,10 @@
 function love.load()    
     cfg = require('config')
     snake = require('snake')
-    colors = require('colors')
-    game = require('game')
     cherry = require('cherry')
+    colors = require('colors')
+    game = require('gameVariables')
+    require('gameFunctions')
     require('debugger')
     require('menu')
 
