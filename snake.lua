@@ -28,9 +28,9 @@ function snake:move()
     end  
 end
 
-function snakeSetDirection(x, y)
-    snake.direction.x = x
-    snake.direction.y = y
+function snake:setDirection(x, y)
+    self.direction.x = x
+    self.direction.y = y
 end
 
 function checkBorderHit()
@@ -44,16 +44,16 @@ end
 
 function love.keypressed(key)
     if key == 'a' and game.prevKeyPressed ~= 'd' then
-        snakeSetDirection(-cfg.size, 0)
+        snake:setDirection(-cfg.size, 0)
         game.prevKeyPressed = 'a'
     elseif key == 'd' and game.prevKeyPressed ~= 'a' then
-        snakeSetDirection(cfg.size, 0)
+        snake:setDirection(cfg.size, 0)
         game.prevKeyPressed = 'd'
     elseif key == 'w' and game.prevKeyPressed ~= 's' then
-        snakeSetDirection(0, -cfg.size)
+        snake:setDirection(0, -cfg.size)
         game.prevKeyPressed = 'w'
     elseif key == 's' and game.prevKeyPressed ~= 'w' then
-        snakeSetDirection(0, cfg.size)
+        snake:setDirection(0, cfg.size)
         game.prevKeyPressed = 's'
     elseif key == 'escape' then
         love.event.quit()
