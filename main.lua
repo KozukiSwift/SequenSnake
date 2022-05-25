@@ -11,7 +11,7 @@ function love.load()
     -- powinno zostać przeniesione do miejsca, gdzie gra się rozpoczyna
     cherry:spawn(cfg.size, cfg.border.left, cfg.border.right, cfg.border.top, cfg.border.bottom)
     snakeSetDirection(cfg.size, 0)
-    spawnSnake(cfg.size, cfg.border.left, cfg.border.top)
+    snake:spawn(cfg.size, cfg.border.left, cfg.border.top)
 end
 
 function love.update(dt)

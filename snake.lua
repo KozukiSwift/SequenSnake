@@ -7,12 +7,12 @@ snake.direction.y = 0
 
 snake.position = {}
 
-function spawnSnake(size, borderLeft, borderTop)
+function snake:spawn(size, borderLeft, borderTop)
     for i=1, 3, 1 do
         local snakePart = {}
         snakePart.x = borderLeft + (5 + i) * size
         snakePart.y = borderTop + 5 * size
-        table.insert(snake.position, snakePart)
+        table.insert(self.position, snakePart)
     end
 end
 
