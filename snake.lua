@@ -42,30 +42,10 @@ function checkBorderHit()
     end
 end
 
-function love.keypressed(key)
-    if key == 'a' and game.prevKeyPressed ~= 'd' then
-        snake:setDirection(-cfg.size, 0)
-        game.prevKeyPressed = 'a'
-    elseif key == 'd' and game.prevKeyPressed ~= 'a' then
-        snake:setDirection(cfg.size, 0)
-        game.prevKeyPressed = 'd'
-    elseif key == 'w' and game.prevKeyPressed ~= 's' then
-        snake:setDirection(0, -cfg.size)
-        game.prevKeyPressed = 'w'
-    elseif key == 's' and game.prevKeyPressed ~= 'w' then
-        snake:setDirection(0, cfg.size)
-        game.prevKeyPressed = 's'
-    elseif key == 'escape' then
-        love.event.quit()
-    elseif key == 'space' and (game.state == 0) then
-        game.state = 1
-    end
-end
-
-function drawSnake()
-    love.graphics.setColor(colors.blueDark.r, colors.blueDark.g, colors.blueDark.b)
+function snake:draw(size, r, g, b)
+    love.graphics.setColor(r, g, b)
     for i, s in ipairs(snake.position) do
-        love.graphics.rectangle('fill', s.x, s.y, cfg.size, cfg.size)
+        love.graphics.rectangle('fill', s.x, s.y, size, size)
     end
 end
 
