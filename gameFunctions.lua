@@ -52,5 +52,5 @@ function playGame(dt)
     end
 
     -- checking if snake hit the boarder
-    checkBorderHit()
+    snake:checkBorderHit(cfg.size, cfg.border)
 end

@@ -33,11 +33,11 @@ function snake:setDirection(x, y)
     self.direction.y = y
 end
 
-function checkBorderHit()
-    if snake.position[1].x == (cfg.border.left - cfg.size) or 
-            snake.position[1].x == cfg.border.right or 
-            snake.position[1].y == (cfg.border.top - cfg.size) or 
-            snake.position[1].y == cfg.border.bottom then
+function snake:checkBorderHit(size, border)
+    if self.position[1].x == (border.left - size) or 
+            self.position[1].x == border.right or 
+            self.position[1].y == (border.top - size) or 
+            self.position[1].y == border.bottom then
         game.state = 2
     end
 end
