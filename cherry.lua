@@ -1,5 +1,15 @@
-cherry = {}
-cherry.radius = snakeCfg.size / 2
-cherry.x = math.random(border.left / snakeCfg.size, math.floor(border.right / snakeCfg.size - 1)) * snakeCfg.size + cherry.radius -- zmienić na funkcjęl
-cherry.y = math.random(border.top / snakeCfg.size, math.floor(border.bottom / snakeCfg.size - 1)) * snakeCfg.size + cherry.radius
+local cherry = {}
+cherry.x = 0
+cherry.y = 0
 
+function cherry:spawn(size, borderLeft, borderRight, borderTop, borderBottom)
+    self.x = math.random(borderLeft / size, math.floor(borderRight / size - 1)) * size
+    self.y = math.random(borderTop / size, math.floor(borderBottom / size - 1)) * size
+end
+
+function cherry:draw(size, r, g, b)
+    love.graphics.setColor(r, g, b)
+    love.graphics.rectangle('fill', self.x, self.y, size, size)
+end
+
+return cherry
