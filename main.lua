@@ -1,12 +1,12 @@
 function love.load()    
-    cfg = require('config')
-    snake = require('snake')
-    cherry = require('cherry')
-    colors = require('colors')
-    game = require('gameVariables')
-    require('gameFunctions')
-    require('debugger')
-    require('menu')
+    cfg = require('config/config')
+    snake = require('objects/snake')
+    cherry = require('objects/cherry')
+    colors = require('config/colors')
+    game = require('game/gameVariables')
+    require('game/gameFunctions')
+    require('menu/debugger')
+    require('menu/menu')
 
     -- spawning initial cherry / snake / snake direction
     -- powinno zostać przeniesione do miejsca, gdzie gra się rozpoczyna
